@@ -3,6 +3,7 @@ using NAudio.Wave;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Timers;
 
 namespace Jaxx.Net.Cobaka.NAudioWrapper
 {
@@ -11,6 +12,7 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
         private WaveFileWriter _writer;
         private WasapiCapture _audioIn;
         private readonly INoiseDetectorOptions _noiseDetectionOptions;
+        private readonly Timer _recordTimer;
         public NAudioHandler(INoiseDetectorOptions options)
         {
             _noiseDetectionOptions = options;
@@ -19,8 +21,15 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
             _audioIn.RecordingStopped += AudioInRecordingStopped;
             PeakValue = 0;
             _audioIn.StartRecording();
+            _recordTimer = new Timer { AutoReset = true };
+            _recordTimer.Elapsed += RecordTimer_Elapsed;
         }
-       
+
+        private void RecordTimer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            StopRecord();
+        }
+
         public event EventHandler RecordStarted;
         public event EventHandler SampleAvailable;
         public event EventHandler RecordStopped;
@@ -69,6 +78,8 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
         public void StartRecord()
         {
             IsRecording = true;
+            _recordTimer.Interval = _noiseDetectionOptions.RecordDuration.TotalMilliseconds;
+            _recordTimer.Start();
             var now = DateTime.Now;
             var timeStamp = $"{now.Year}_{now.Month}_{now.Day}_{now.Hour}_{now.Minute}_{now.Second}";
             var path = Path.Combine(_noiseDetectionOptions.DestinationDirectory, $"autoRecord_{timeStamp}.wav");
