@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jaxx.Net.Cobaka", "Jaxx.Net
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jaxx.Net.Cobaka.NoiseDetector", "Jaxx.Net.Cobaka.NoiseDetector\Jaxx.Net.Cobaka.NoiseDetector.csproj", "{94D74BE8-9A37-4E8D-8B40-E6BB6BD65A20}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jaxx.Net.Cobaka.NAudioWrapper", "Jaxx.Net.Cobaka.NAudioWrapper\Jaxx.Net.Cobaka.NAudioWrapper.csproj", "{B2FE57F5-E65F-416C-9173-F140D53FA9B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jaxx.Net.Cobaka.NAudioWrapper", "Jaxx.Net.Cobaka.NAudioWrapper\Jaxx.Net.Cobaka.NAudioWrapper.csproj", "{B2FE57F5-E65F-416C-9173-F140D53FA9B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
