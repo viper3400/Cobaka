@@ -94,6 +94,7 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
             _writer = null;
             //_audioIn.Dispose(); 
             OnRecordStopped(new EventArgs());
+            _audioIn.StartRecording();
         }
 
         private void AudioInDataAvailable(object s, WaveInEventArgs a)
@@ -122,7 +123,7 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
         public void StopRecord()
         {
             _audioIn.StopRecording();
-            IsRecording = false;
+            IsRecording = false;            
         }
 
 
