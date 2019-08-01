@@ -1,5 +1,6 @@
 ﻿using Jaxx.Net.Cobaka.NAudioWrapper;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace Jaxx.Net.Cobaka.NoiseDetector.ViewModels
     {
         private readonly NAudioHandler _audio;
         private INoiseDetectorOptions _noiseDetectorOptions;
-        public NoiseDetectorViewModel(INoiseDetectorOptions options)
+        public NoiseDetectorViewModel(INoiseDetectorOptions options, IEventAggregator eventAggregator)
         {
             _noiseDetectorOptions = options;
             // inital fill settings with default value
@@ -25,6 +26,12 @@ namespace Jaxx.Net.Cobaka.NoiseDetector.ViewModels
             _audio.RecordStarted += Audio_RecordStarted;
             _audio.RecordStopped += Audio_RecordStopped;
             _audio.SampleAvailable += Audio_SampleAvailable;
+            eventAggregator.GetEvent<StopRequestEvent>().Subscribe(OnStopRequested);
+        }
+
+        private void OnStopRequested(string obj)
+        {
+            _audio.StopAndDispose();
         }
 
         private void Audio_RecordStarted(object sender, EventArgs e)
@@ -96,7 +103,7 @@ namespace Jaxx.Net.Cobaka.NoiseDetector.ViewModels
             set { SetProperty(ref deviceList, value); }
         }
 
-        private DelegateCommand _deviceList;
+       private DelegateCommand _deviceList;
         public DelegateCommand GetDeviceList =>
             _deviceList ?? (_deviceList = new DelegateCommand(ExecuteGetDeviceList, CanExecuteGetDeviceList));
 

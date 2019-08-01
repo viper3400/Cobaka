@@ -13,6 +13,7 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
         private WasapiCapture _audioIn;
         private readonly INoiseDetectorOptions _noiseDetectionOptions;
         private readonly Timer _recordTimer;
+        private bool _isStopAndDisposeRequested;
         public NAudioHandler(INoiseDetectorOptions options)
         {
             _noiseDetectionOptions = options;
@@ -91,10 +92,13 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
         private void AudioInRecordingStopped(object s, StoppedEventArgs a)
         {
             _writer?.Dispose();
-            _writer = null;
-            //_audioIn.Dispose(); 
+            _writer = null;            
             OnRecordStopped(new EventArgs());
-            _audioIn.StartRecording();
+            if (!_isStopAndDisposeRequested)
+            {
+                _audioIn.StartRecording();
+            }
+            else _audioIn.Dispose();
         }
 
         private void AudioInDataAvailable(object s, WaveInEventArgs a)
@@ -123,6 +127,7 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
         public void StopRecord()
         {
             _audioIn.StopRecording();
+            _recordTimer.Stop();
             IsRecording = false;            
         }
 
@@ -133,6 +138,16 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
             {
                 StartRecord();
             }
+        }
+
+        public void StopAndDispose()
+        {
+            _isStopAndDisposeRequested = true;
+            if (IsRecording)
+            {
+                StopRecord();
+            }
+            else _audioIn.Dispose();
         }
     }
 }
