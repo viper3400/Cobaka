@@ -17,6 +17,6 @@
         <Button Command="{Binding StartRecord}" Content="Start" HorizontalAlignment="Left" Margin="10,147,0,0" VerticalAlignment="Top" Width="75"/>
         <Button Command="{Binding StopRecord}" Content="Stop" HorizontalAlignment="Left" Margin="10,172,0,0" VerticalAlignment="Top" Width="75"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="117,169,0,0" TextWrapping="Wrap" Text="{Binding PeakValue, Mode=OneWay}" VerticalAlignment="Top" Width="120"/>
-        <ProgressBar Value="{Binding PeakValue, Mode=OneWay}"  HorizontalAlignment="Left" Height="10" Margin="10,213,0,0" VerticalAlignment="Top" Width="100"/>
+        <ProgressBar Value="{Binding PeakValue, Mode=OneWay}"  HorizontalAlignment="Left" Height="15" Margin="10,213,0,0" VerticalAlignment="Top" Width="280"/>
     </Grid>
 </UserControl>
