@@ -14,9 +14,9 @@
                        VerticalAlignment="Center" />
         <Button Command="{Binding GetDeviceList}" Content="Get Devices" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75"/>
         <ListView ItemsSource="{Binding DeviceList}" HorizontalAlignment="Left" Height="100" Margin="10,42,0,0" VerticalAlignment="Top" Width="280"/>
-        <Button Command="{Binding StartRecord}" Content="Start" HorizontalAlignment="Left" Margin="10,147,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Command="{Binding StopRecord}" Content="Stop" HorizontalAlignment="Left" Margin="10,172,0,0" VerticalAlignment="Top" Width="75"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="117,169,0,0" TextWrapping="Wrap" Text="{Binding PeakValue, Mode=OneWay}" VerticalAlignment="Top" Width="120"/>
-        <ProgressBar Value="{Binding PeakValue, Mode=OneWay}"  HorizontalAlignment="Left" Height="15" Margin="10,213,0,0" VerticalAlignment="Top" Width="280"/>
+        <Button Command="{Binding StartRecord}" Content="Start" HorizontalAlignment="Left" Margin="10,180,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Command="{Binding StopRecord}" Content="Stop" HorizontalAlignment="Left" Margin="94,180,0,0" VerticalAlignment="Top" Width="75"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="256,205,0,0" TextWrapping="Wrap" Text="{Binding PeakValue, Mode=OneWay}" VerticalAlignment="Top" Width="34"/>
+        <ProgressBar Value="{Binding PeakValue, Mode=OneWay}"  HorizontalAlignment="Left" Height="23" Margin="10,205,0,0" VerticalAlignment="Top" Width="241"/>
     </Grid>
 </UserControl>
