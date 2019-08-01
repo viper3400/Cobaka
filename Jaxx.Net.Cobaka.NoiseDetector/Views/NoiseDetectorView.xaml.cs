@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Jaxx.Net.Cobaka.NoiseDetector.Views
 {
     /// <summary>
-    /// Interaction logic for ViewA.xaml
+    /// Interaction logic for NoiseDetectorView.xaml
     /// </summary>
-    public partial class ViewA : UserControl
+    public partial class NoiseDetectorView : UserControl
     {
-        public ViewA()
+        public NoiseDetectorView()
         {
             InitializeComponent();
         }

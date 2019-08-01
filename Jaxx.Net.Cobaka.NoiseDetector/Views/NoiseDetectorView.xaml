@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Jaxx.Net.Cobaka.NoiseDetector.Views.ViewA"
+﻿<UserControl x:Class="Jaxx.Net.Cobaka.NoiseDetector.Views.NoiseDetectorView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Jaxx.Net.Cobaka.NoiseDetector.Views"

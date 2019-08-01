@@ -22,7 +22,7 @@ namespace Jaxx.Net.Cobaka.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var view = _container.Resolve<ViewA>();
+            var view = _container.Resolve<NoiseDetectorView>();
             IRegion region = _regionManager.Regions["ContentRegion"];
             region.Add(view);
         }

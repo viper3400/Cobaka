@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Jaxx.Net.Cobaka.NoiseDetector.ViewModels
 {
-    public class ViewAViewModel : BindableBase
+    public class NoiseDetectorViewModel : BindableBase
     {
         private readonly NAudioHandler _audio;        
 
-        public ViewAViewModel(INoiseDetectorOptions options)
+        public NoiseDetectorViewModel(INoiseDetectorOptions options)
         {
             _audio = new NAudioHandler(options);
             _audio.RecordStarted += Audio_RecordStarted;
