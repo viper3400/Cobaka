@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace Jaxx.Net.Cobaka.NoiseDetector.ViewModels
 {
@@ -43,6 +44,7 @@ namespace Jaxx.Net.Cobaka.NoiseDetector.ViewModels
         private void Audio_SampleAvailable(object sender, EventArgs e)
         {
             RaisePropertyChanged("PeakValue");
+            RaisePropertyChanged("PeakBarColor");
         }
 
         private void Audio_RecordStopped(object sender, EventArgs e)
@@ -102,8 +104,17 @@ namespace Jaxx.Net.Cobaka.NoiseDetector.ViewModels
             get { return deviceList; }
             set { SetProperty(ref deviceList, value); }
         }
+        public Brush PeakBarColor
+        {
+            get
+            {
+                var _peakBarColor = Brushes.Green;
+                if (_audio.PeakValue >= _noiseDetectorOptions.Treshold) _peakBarColor = Brushes.Red;
+                return _peakBarColor;                                
+            }
+        }
 
-       private DelegateCommand _deviceList;
+        private DelegateCommand _deviceList;
         public DelegateCommand GetDeviceList =>
             _deviceList ?? (_deviceList = new DelegateCommand(ExecuteGetDeviceList, CanExecuteGetDeviceList));
 
