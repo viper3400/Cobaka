@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
-             d:DesignHeight="400" d:DesignWidth="300"
+             d:DesignHeight="400" d:DesignWidth="525"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True" >
     <Grid>
@@ -16,9 +16,9 @@
         <ListView ItemsSource="{Binding DeviceList}" HorizontalAlignment="Left" Height="70" Margin="10,42,0,0" VerticalAlignment="Top" Width="280"/>
         <Button Command="{Binding StartRecord}" Content="Start" HorizontalAlignment="Left" Margin="10,284,0,0" VerticalAlignment="Top" Width="75"/>
         <Button Command="{Binding StopRecord}" Content="Stop" HorizontalAlignment="Left" Margin="94,284,0,0" VerticalAlignment="Top" Width="75"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="256,309,0,0" TextWrapping="Wrap" Text="{Binding PeakValue, Mode=OneWay}" VerticalAlignment="Top" Width="34"/>
-        <ProgressBar Value="{Binding PeakValue, Mode=OneWay}"  HorizontalAlignment="Left" Height="23" Margin="10,309,0,0" VerticalAlignment="Top" Width="241"/>
-        <GroupBox Header="Settings" HorizontalAlignment="Left" Height="134" Margin="10,125,0,0" VerticalAlignment="Top" Width="280">
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="330,309,0,0" TextWrapping="Wrap" Text="{Binding PeakValue, Mode=OneWay}" VerticalAlignment="Top" Width="46"/>
+        <ProgressBar Value="{Binding PeakValue, Mode=OneWay}"  HorizontalAlignment="Left" Height="23" Margin="10,309,0,0" VerticalAlignment="Top" Width="315"/>
+        <GroupBox Header="Settings" HorizontalAlignment="Left" Height="134" Margin="10,125,0,0" VerticalAlignment="Top" Width="420">
             <StackPanel>
                 <WrapPanel>
                     <Label Content="Treshold" />
@@ -28,7 +28,7 @@
                 </WrapPanel>
                 <WrapPanel>
                     <Label Content="Destination" Width="75"/>
-                    <TextBox Height="20" TextWrapping="Wrap" Text="{Binding DestinationDirectory}" Width="186" />
+                    <TextBox Height="20" TextWrapping="Wrap" Text="{Binding DestinationDirectory}" Width="322" />
                 </WrapPanel>
             </StackPanel>
         </GroupBox>
