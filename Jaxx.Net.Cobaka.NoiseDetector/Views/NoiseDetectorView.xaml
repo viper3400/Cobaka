@@ -27,6 +27,10 @@
                     <TextBox Height="20" TextWrapping="Wrap" Text="{Binding DurationInSeconds}" Width="45" />
                 </WrapPanel>
                 <WrapPanel>
+                    <Label Content="Continue Record When Over Treshold"/>
+                    <CheckBox VerticalAlignment="Center" IsChecked="{Binding ContinueRecordWhenOverTreshold}" />
+                </WrapPanel>
+                <WrapPanel>
                     <Label Content="Destination" Width="75"/>
                     <TextBox Height="20" TextWrapping="Wrap" Text="{Binding DestinationDirectory}" Width="322" />
                 </WrapPanel>

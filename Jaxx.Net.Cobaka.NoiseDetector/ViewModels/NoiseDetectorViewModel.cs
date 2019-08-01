@@ -22,6 +22,7 @@ namespace Jaxx.Net.Cobaka.NoiseDetector.ViewModels
             RecordTreshold = _noiseDetectorOptions.Treshold;
             DestinationDirectory = _noiseDetectorOptions.DestinationDirectory;
             DurationInSeconds = (int)_noiseDetectorOptions.RecordDuration.TotalSeconds;
+            ContinueRecordWhenOverTreshold = _noiseDetectorOptions.ContinueRecordWhenOverTreshold;
 
             _audio = new NAudioHandler(_noiseDetectorOptions);
             _audio.RecordStarted += Audio_RecordStarted;
@@ -111,6 +112,17 @@ namespace Jaxx.Net.Cobaka.NoiseDetector.ViewModels
                 var _peakBarColor = Brushes.Green;
                 if (_audio.PeakValue >= _noiseDetectorOptions.Treshold) _peakBarColor = Brushes.Red;
                 return _peakBarColor;                                
+            }
+        }
+
+        private bool _continueRecordWhenOverTreshold;
+        public bool ContinueRecordWhenOverTreshold
+        {
+            get { return _continueRecordWhenOverTreshold; }
+            set
+            {
+                SetProperty(ref _continueRecordWhenOverTreshold, value);
+                _noiseDetectorOptions.ContinueRecordWhenOverTreshold = _continueRecordWhenOverTreshold;
             }
         }
 

@@ -138,6 +138,12 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
             {
                 StartRecord();
             }
+            else if (IsRecording && PeakValue >= _noiseDetectionOptions.Treshold && _noiseDetectionOptions.ContinueRecordWhenOverTreshold)
+            {
+                // reset timer in case peak value has been reached again, while record is running
+                _recordTimer.Stop();
+                _recordTimer.Start();
+            }
         }
 
         public void StopAndDispose()
