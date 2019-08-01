@@ -81,6 +81,7 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
             _recordTimer.Interval = _noiseDetectionOptions.RecordDuration.TotalMilliseconds;
             _recordTimer.Start();
             var timeStamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+            Directory.CreateDirectory(_noiseDetectionOptions.DestinationDirectory);
             var path = Path.Combine(_noiseDetectionOptions.DestinationDirectory, $"autoRecord_{timeStamp}.wav");
             _writer = null;
             _writer = new WaveFileWriter(path, new WaveFormat(_audioIn.WaveFormat.SampleRate, _audioIn.WaveFormat.BitsPerSample, _audioIn.WaveFormat.Channels));

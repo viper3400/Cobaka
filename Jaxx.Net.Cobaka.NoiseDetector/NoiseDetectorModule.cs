@@ -4,6 +4,7 @@ using Jaxx.Net.Cobaka.NoiseDetector.Views;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
+using System.IO;
 
 namespace Jaxx.Net.Cobaka.NoiseDetector
 {
@@ -17,7 +18,7 @@ namespace Jaxx.Net.Cobaka.NoiseDetector
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterInstance<INoiseDetectorOptions>(new NoiseDetectorOptions { Treshold = 0.4, RecordDuration = new System.TimeSpan(0, 0, 10), DestinationDirectory = @"C:\Users\Jan\Music" });
+            containerRegistry.RegisterInstance<INoiseDetectorOptions>(new NoiseDetectorOptions { Treshold = 0.35, RecordDuration = new System.TimeSpan(0, 0, 10), DestinationDirectory = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData),"Cobaka","NoiseDetectorRecords") });
         }
     }
 }
