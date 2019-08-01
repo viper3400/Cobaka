@@ -4,7 +4,7 @@ namespace Jaxx.Net.Cobaka.ViewModels
 {
     public class MainWindowViewModel : BindableBase
     {
-        private string _title = "Prism Application";
+        private string _title = "Cobaka";
         public string Title
         {
             get { return _title; }
