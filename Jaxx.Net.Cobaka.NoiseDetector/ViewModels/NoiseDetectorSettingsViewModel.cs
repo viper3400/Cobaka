@@ -4,6 +4,7 @@ using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace Jaxx.Net.Cobaka.NoiseDetector.ViewModels
 {
@@ -62,6 +63,21 @@ namespace Jaxx.Net.Cobaka.NoiseDetector.ViewModels
             {
                 SetProperty(ref _continueRecordWhenOverTreshold, value);
                 _noiseDetectorOptions.ContinueRecordWhenOverTreshold = _continueRecordWhenOverTreshold;
+            }
+        }
+
+        private DelegateCommand _selectFolderDialog;
+        public DelegateCommand SelectFolderDialogCommad =>
+            _selectFolderDialog ?? (_selectFolderDialog = new DelegateCommand(ExecuteSelectFolderDialogCommad));
+
+        void ExecuteSelectFolderDialogCommad()
+        {
+            var openFolderDialog = new FolderBrowserDialog();
+            openFolderDialog.SelectedPath = _noiseDetectorOptions.DestinationDirectory;
+            var result = openFolderDialog.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                DestinationDirectory = openFolderDialog.SelectedPath;
             }
         }
     }

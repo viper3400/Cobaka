@@ -9,7 +9,7 @@
                 <WrapPanel>
                     <Label Content="Destination Directory" Width="130" />
                     <TextBox Text="{Binding DestinationDirectory}" Height="23" Width="250"/>
-                    <Button Content="..." Margin="4" Height="23" Width="21"/>
+                    <Button Content="..." Margin="4" Height="23" Width="21" Command="{Binding SelectFolderDialogCommad}"/>
                 </WrapPanel>
                 <WrapPanel>
                     <Label Content="Treshold" Width="130"/>
