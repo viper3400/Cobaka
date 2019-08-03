@@ -5,3 +5,7 @@ Cobaka "monitors" your dogs noise (especially the barking) when you're not at ho
 If a special treshold is reached it starts a new recording (wav) for some seconds and saves it to a file. You could adjust the **treshold** (0.01 - 0.99), the **duration of each record** (in seconds) and the **destination directory**.
 
 Choose **Continue Record When Over Treshold** ceckbox to record a continuous file while noise level is over the treshold. Record will stop when level is under the treshold for the time specified for duration.
+
+The app is listening as soon it's started and will stop to listen when it is closed. Use Start/Stop for manual override.
+
+![AppWindow](https://github.com/viper3400/Cobaka/blob/master/CobakaMainWindow.png)
