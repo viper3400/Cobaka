@@ -7,7 +7,7 @@ using System.Timers;
 
 namespace Jaxx.Net.Cobaka.NAudioWrapper
 {
-    public class NAudioHandler
+    public class NAudioHandler : IAudioHandler
     {
         private WaveFileWriter _writer;
         private WasapiCapture _audioIn;
@@ -51,7 +51,7 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
             EventHandler handler = RecordStopped;
             handler?.Invoke(this, e);
         }
-       
+
         public bool IsRecording { get; private set; }
         public float PeakValue { get; private set; }
         public List<string> DeviceList
@@ -92,7 +92,7 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
         private void AudioInRecordingStopped(object s, StoppedEventArgs a)
         {
             _writer?.Dispose();
-            _writer = null;            
+            _writer = null;
             OnRecordStopped(new EventArgs());
             if (!_isStopAndDisposeRequested)
             {
@@ -128,7 +128,7 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
         {
             _audioIn.StopRecording();
             _recordTimer.Stop();
-            IsRecording = false;            
+            IsRecording = false;
         }
 
 

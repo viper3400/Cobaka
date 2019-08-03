@@ -13,12 +13,12 @@ namespace Jaxx.Net.Cobaka.NoiseDetector.ViewModels
 {
     public class NoiseDetectorViewModel : BindableBase
     {
-        private readonly NAudioHandler _audio;
+        private readonly IAudioHandler _audio;
         private INoiseDetectorOptions _noiseDetectorOptions;
-        public NoiseDetectorViewModel(INoiseDetectorOptions options, IEventAggregator eventAggregator)
+        public NoiseDetectorViewModel(INoiseDetectorOptions options, IAudioHandler audio, IEventAggregator eventAggregator)
         {
             _noiseDetectorOptions = options;
-            _audio = new NAudioHandler(_noiseDetectorOptions);
+            _audio = audio;
             _audio.RecordStarted += Audio_RecordStarted;
             _audio.RecordStopped += Audio_RecordStopped;
             _audio.SampleAvailable += Audio_SampleAvailable;
