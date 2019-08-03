@@ -11,8 +11,11 @@
     <Grid>
         <Button Command="{Binding GetDeviceList}" Content="Get Devices" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75"/>
         <ListView ItemsSource="{Binding DeviceList}" HorizontalAlignment="Left" Height="70" Margin="10,42,0,0" VerticalAlignment="Top" Width="280"/>
-        <Button Command="{Binding StartRecord}" Content="Start" HorizontalAlignment="Left" Margin="10,126,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Command="{Binding StopRecord}" Content="Stop" HorizontalAlignment="Left" Margin="94,126,0,0" VerticalAlignment="Top" Width="75"/>
+        <WrapPanel>
+            <Button Command="{Binding StartRecord}" Content="Start" HorizontalAlignment="Left" Margin="10,126,0,0" VerticalAlignment="Top" Width="75"/>
+            <Button Command="{Binding StopRecord}" Content="Stop" HorizontalAlignment="Left" Margin="10,126,0,0" VerticalAlignment="Top" Width="75"/>
+            <Button Command="{Binding ExploreRecords}" Content="Explore Records" HorizontalAlignment="Left" Margin="10,126,0,0" VerticalAlignment="Top" Width="110"/>
+        </WrapPanel>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="330,151,0,0" TextWrapping="Wrap" Text="{Binding PeakValue, Mode=OneWay}" VerticalAlignment="Top" Width="46"/>
         <ProgressBar Value="{Binding PeakValue, Mode=OneWay}"  Foreground="{Binding PeakBarColor, Mode=OneWay}" HorizontalAlignment="Left" Height="23" Margin="10,151,0,0" VerticalAlignment="Top" Width="315"/>
     </Grid>
