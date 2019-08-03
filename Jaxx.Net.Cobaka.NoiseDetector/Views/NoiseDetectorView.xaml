@@ -5,36 +5,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
-             d:DesignHeight="400" d:DesignWidth="525"
+             d:DesignHeight="188.811" d:DesignWidth="525"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True" >
     <Grid>
-        <TextBlock Text="{Binding Message}"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center" Margin="150,296,150,88" />
         <Button Command="{Binding GetDeviceList}" Content="Get Devices" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75"/>
         <ListView ItemsSource="{Binding DeviceList}" HorizontalAlignment="Left" Height="70" Margin="10,42,0,0" VerticalAlignment="Top" Width="280"/>
-        <Button Command="{Binding StartRecord}" Content="Start" HorizontalAlignment="Left" Margin="10,284,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Command="{Binding StopRecord}" Content="Stop" HorizontalAlignment="Left" Margin="94,284,0,0" VerticalAlignment="Top" Width="75"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="330,309,0,0" TextWrapping="Wrap" Text="{Binding PeakValue, Mode=OneWay}" VerticalAlignment="Top" Width="46"/>
-        <ProgressBar Value="{Binding PeakValue, Mode=OneWay}"  Foreground="{Binding PeakBarColor, Mode=OneWay}" HorizontalAlignment="Left" Height="23" Margin="10,309,0,0" VerticalAlignment="Top" Width="315"/>
-        <GroupBox Header="Settings" HorizontalAlignment="Left" Height="134" Margin="10,125,0,0" VerticalAlignment="Top" Width="420">
-            <StackPanel>
-                <WrapPanel>
-                    <Label Content="Treshold" />
-                    <TextBox Height="20" TextWrapping="Wrap" Text="{Binding RecordTreshold}" Width="45" />
-                    <Label Content="Duration"/>
-                    <TextBox Height="20" TextWrapping="Wrap" Text="{Binding DurationInSeconds}" Width="45" />
-                </WrapPanel>
-                <WrapPanel>
-                    <Label Content="Continue Record When Over Treshold"/>
-                    <CheckBox VerticalAlignment="Center" IsChecked="{Binding ContinueRecordWhenOverTreshold}" />
-                </WrapPanel>
-                <WrapPanel>
-                    <Label Content="Destination" Width="75"/>
-                    <TextBox Height="20" TextWrapping="Wrap" Text="{Binding DestinationDirectory}" Width="322" />
-                </WrapPanel>
-            </StackPanel>
-        </GroupBox>
+        <Button Command="{Binding StartRecord}" Content="Start" HorizontalAlignment="Left" Margin="10,126,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Command="{Binding StopRecord}" Content="Stop" HorizontalAlignment="Left" Margin="94,126,0,0" VerticalAlignment="Top" Width="75"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="330,151,0,0" TextWrapping="Wrap" Text="{Binding PeakValue, Mode=OneWay}" VerticalAlignment="Top" Width="46"/>
+        <ProgressBar Value="{Binding PeakValue, Mode=OneWay}"  Foreground="{Binding PeakBarColor, Mode=OneWay}" HorizontalAlignment="Left" Height="23" Margin="10,151,0,0" VerticalAlignment="Top" Width="315"/>
     </Grid>
 </UserControl>

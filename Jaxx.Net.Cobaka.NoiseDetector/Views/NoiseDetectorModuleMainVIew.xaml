@@ -4,6 +4,9 @@
              xmlns:prism="http://prismlibrary.com/"             
              prism:ViewModelLocator.AutoWireViewModel="True">
     <Grid>
-        <ContentControl prism:RegionManager.RegionName="NoiseDetectorModuleMainRegion" />
+        <StackPanel Margin="10">
+            <ContentControl prism:RegionManager.RegionName="NoiseDetectorModuleMainRegion" />
+            <ContentControl prism:RegionManager.RegionName="NoiseDetectorModuleSettingsRegion" />
+        </StackPanel>
     </Grid>
 </UserControl>

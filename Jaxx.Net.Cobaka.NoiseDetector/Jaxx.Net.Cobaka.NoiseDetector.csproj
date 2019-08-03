@@ -65,9 +65,13 @@
     </Compile>
     <Compile Include="StopRequestEvent.cs" />
     <Compile Include="ViewModels\NoiseDetectorModuleMainViewModel.cs" />
+    <Compile Include="ViewModels\NoiseDetectorSettingsViewModel.cs" />
     <Compile Include="ViewModels\NoiseDetectorViewModel.cs" />
     <Compile Include="Views\NoiseDetectorModuleMainView.xaml.cs">
       <DependentUpon>NoiseDetectorModuleMainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NoiseDetectorSettingsView.xaml.cs">
+      <DependentUpon>NoiseDetectorSettingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\NoiseDetectorView.xaml.cs">
       <DependentUpon>NoiseDetectorView.xaml</DependentUpon>
@@ -90,6 +94,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\NoiseDetectorModuleMainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NoiseDetectorSettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

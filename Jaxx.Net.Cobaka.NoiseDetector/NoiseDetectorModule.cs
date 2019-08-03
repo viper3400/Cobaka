@@ -14,6 +14,7 @@ namespace Jaxx.Net.Cobaka.NoiseDetector
         {
             var regionManager = containerProvider.Resolve<IRegionManager>();
             regionManager.RegisterViewWithRegion("NoiseDetectorModuleMainRegion", typeof(NoiseDetectorView));
+            regionManager.RegisterViewWithRegion("NoiseDetectorModuleSettingsRegion", typeof(NoiseDetectorSettingsView));
             regionManager.RegisterViewWithRegion("ContentRegion", typeof(NoiseDetectorModuleMainView));            
         }
 
