@@ -50,7 +50,7 @@ namespace Jaxx.Net.Cobaka.NoiseDetector.ViewModels
         
         public float PeakValue
         {
-            get { return (float)Math.Round(_audio.PeakValue * 100, 2); }
+            get { return (float)Math.Round(_audio.PeakValue * 100); }
         }
 
         private IEnumerable<string> deviceList;
