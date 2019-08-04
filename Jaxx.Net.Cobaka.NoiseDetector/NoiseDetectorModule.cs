@@ -20,9 +20,9 @@ namespace Jaxx.Net.Cobaka.NoiseDetector
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterInstance<INoiseDetectorOptions>(new NoiseDetectorOptions { Treshold = 0.35, RecordDuration = new System.TimeSpan(0, 0, 10), DestinationDirectory = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments),"Cobaka","NoiseDetectorRecords"), ContinueRecordWhenOverTreshold = true });
-            containerRegistry.Register<IAudioConfigurationProvider, AudioConfigurationProvider>();
-            containerRegistry.Register<IAudioHandler, NAudioHandler>();
+            containerRegistry.RegisterSingleton<INoiseDetectorOptions, NoiseDetectorOptions>();
+            containerRegistry.RegisterSingleton<IAudioConfigurationProvider, AudioConfigurationProvider>();
+            containerRegistry.RegisterSingleton<IAudioHandler, NAudioHandler>();
         }
     }
 }

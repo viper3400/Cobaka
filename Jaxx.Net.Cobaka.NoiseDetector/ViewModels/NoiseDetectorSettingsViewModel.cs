@@ -15,6 +15,11 @@ namespace Jaxx.Net.Cobaka.NoiseDetector.ViewModels
         {
             _optionsProvider = optionsProvider;
             // inital fill settings with default value
+            LoadOptions();
+        }
+
+        private void LoadOptions()
+        {
             RecordTreshold = Convert.ToInt32(_optionsProvider.NoiseDetectorOptions.Treshold * 100);
             DestinationDirectory = _optionsProvider.NoiseDetectorOptions.DestinationDirectory;
             DurationInSeconds = (int)_optionsProvider.NoiseDetectorOptions.RecordDuration.TotalSeconds;
@@ -84,6 +89,17 @@ namespace Jaxx.Net.Cobaka.NoiseDetector.ViewModels
                 DestinationDirectory = openFolderDialog.SelectedPath;
                 _optionsProvider.Save();
             }
+        }
+
+        private DelegateCommand _resetDefaults;
+        public DelegateCommand ResetDefaults =>
+            _resetDefaults ?? (_resetDefaults = new DelegateCommand(ExecuteResetDefaults));
+
+        void ExecuteResetDefaults()
+        {
+            // Reset and reload options
+            _optionsProvider.Reset();
+            LoadOptions();
         }
     }
 }

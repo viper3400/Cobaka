@@ -15,7 +15,9 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
         {            
             // init with default values
             NoiseDetectorOptions = noiseDetectorOptions;
+            InitDefaults();
 
+            // check for existing config
             _configFile = Path.Combine(_configPath, "NoiseDetectorConfig.json");
             Load();
         }
@@ -41,6 +43,22 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
                 NoiseDetectorOptions.DestinationDirectory = (string)jsonObject["DestinationDirectory"];
                 NoiseDetectorOptions.ContinueRecordWhenOverTreshold = (bool)jsonObject["ContinueRecordWhenOverTreshold"];                
             }
+        }
+
+        private void InitDefaults()
+        {
+            // init with default values
+            NoiseDetectorOptions.Treshold = 0.35;
+            NoiseDetectorOptions.RecordDuration = new System.TimeSpan(0, 0, 10);
+            NoiseDetectorOptions.DestinationDirectory = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), "Cobaka", "NoiseDetectorRecords");
+            NoiseDetectorOptions.ContinueRecordWhenOverTreshold = true;
+        }
+
+        public void Reset()
+        {
+            // Delete settings and reload default values
+            File.Delete(_configFile);
+            InitDefaults();
         }
 
         public INoiseDetectorOptions NoiseDetectorOptions { get; private set; }

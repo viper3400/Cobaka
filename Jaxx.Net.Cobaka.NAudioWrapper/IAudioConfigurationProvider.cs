@@ -3,7 +3,7 @@
     public interface IAudioConfigurationProvider
     {
         INoiseDetectorOptions NoiseDetectorOptions { get; }
-
         void Save();
+        void Reset();
     }
 }
