@@ -31,24 +31,11 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
             StopRecord();
         }
 
-        public event EventHandler<AudioEventArgs> RecordStarted;
-        public event EventHandler SampleAvailable;
-        public event EventHandler RecordStopped;
+        public event EventHandler<AudioEventArgs> AudioEventAvailable;
 
-        protected virtual void OnRecordStarted(AudioEventArgs e)
+        protected virtual void OnAudioEventAvailable(AudioEventArgs e)
         {
-            EventHandler<AudioEventArgs> handler = RecordStarted;
-            handler?.Invoke(this, e);
-        }
-
-        protected virtual void OnSampleAvailable(EventArgs e)
-        {
-            EventHandler handler = SampleAvailable;
-            handler?.Invoke(this, e);
-        }
-        protected virtual void OnRecordStopped(EventArgs e)
-        {
-            EventHandler handler = RecordStopped;
+            EventHandler<AudioEventArgs> handler = AudioEventAvailable;
             handler?.Invoke(this, e);
         }
 
@@ -86,14 +73,14 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
             var path = Path.Combine(_noiseDetectionOptions.DestinationDirectory, $"autoRecord_{timeStamp}.wav");
             _writer = null;
             _writer = new WaveFileWriter(path, _audioIn.WaveFormat);
-            OnRecordStarted(new AudioEventArgs { State = AudioRecordState.Started, Information = $"SampleRate: {_audioIn.WaveFormat.SampleRate}, BitsPerSample: {_audioIn.WaveFormat.BitsPerSample}, Channels: {_audioIn.WaveFormat.Channels}" });
+            OnAudioEventAvailable(new AudioEventArgs { State = AudioRecordState.RecordStarted, Information = $"SampleRate: {_audioIn.WaveFormat.SampleRate}, BitsPerSample: {_audioIn.WaveFormat.BitsPerSample}, Channels: {_audioIn.WaveFormat.Channels}" });
         }
 
         private void AudioInRecordingStopped(object s, StoppedEventArgs a)
         {
             _writer?.Dispose();
             _writer = null;
-            OnRecordStopped(new EventArgs());
+            OnAudioEventAvailable(new AudioEventArgs { State = AudioRecordState.RecordStopped });
             if (!_isStopAndDisposeRequested)
             {
                 _audioIn.StartRecording();
@@ -120,7 +107,7 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
                 // is this the max value?
                 if (sample > PeakValue) PeakValue = sample;
             }
-            OnSampleAvailable(new EventArgs());
+            OnAudioEventAvailable(new AudioEventArgs { State = AudioRecordState.SampleAvailable });
             OnTresholdReached();
         }
 

@@ -20,9 +20,7 @@ namespace Jaxx.Net.Cobaka.NoiseDetector.ViewModels
         {
             _noiseDetectorOptions = options;
             _audio = audio;
-            _audio.RecordStarted += Audio_RecordStarted;
-            _audio.RecordStopped += Audio_RecordStopped;
-            _audio.SampleAvailable += Audio_SampleAvailable;
+            _audio.AudioEventAvailable += OnAudioEventAvailable;
             eventAggregator.GetEvent<StopRequestEvent>().Subscribe(OnStopRequested);
         }
 
@@ -31,25 +29,23 @@ namespace Jaxx.Net.Cobaka.NoiseDetector.ViewModels
             _audio.StopAndDispose();
         }
 
-        private void Audio_RecordStarted(object sender, AudioEventArgs e)
+        private void OnAudioEventAvailable(object sender, AudioEventArgs e)
         {
-            DeviceList = new List<string> { e.Information };
-            StopRecord.RaiseCanExecuteChanged();
-            StartRecord.RaiseCanExecuteChanged();
+            switch (e.State)
+            {
+                case AudioRecordState.SampleAvailable:
+                    RaisePropertyChanged("PeakValue");
+                    RaisePropertyChanged("PeakBarColor");
+                    break;
+                case AudioRecordState.RecordStarted:
+                case AudioRecordState.RecordStopped:
+                    DeviceList = new List<string> { e.Information };
+                    StopRecord.RaiseCanExecuteChanged();
+                    StartRecord.RaiseCanExecuteChanged();
+                    break;
+            }
         }
 
-        private void Audio_SampleAvailable(object sender, EventArgs e)
-        {
-            RaisePropertyChanged("PeakValue");
-            RaisePropertyChanged("PeakBarColor");
-        }
-
-        private void Audio_RecordStopped(object sender, EventArgs e)
-        {
-            StopRecord.RaiseCanExecuteChanged();
-            StartRecord.RaiseCanExecuteChanged();
-        }
-        
         public float PeakValue
         {
             get { return (float)Math.Round(_audio.PeakValue * 100); }
@@ -67,7 +63,7 @@ namespace Jaxx.Net.Cobaka.NoiseDetector.ViewModels
             {
                 var _peakBarColor = Brushes.Green;
                 if (_audio.PeakValue >= _noiseDetectorOptions.Treshold) _peakBarColor = Brushes.Red;
-                return _peakBarColor;                                
+                return _peakBarColor;
             }
         }
 

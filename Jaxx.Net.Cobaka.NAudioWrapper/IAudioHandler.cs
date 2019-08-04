@@ -9,10 +9,7 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
         bool IsRecording { get; }
         float PeakValue { get; }
 
-        event EventHandler<AudioEventArgs> RecordStarted;
-        event EventHandler RecordStopped;
-        event EventHandler SampleAvailable;
-
+        event EventHandler<AudioEventArgs> AudioEventAvailable;
         void StartRecord();
         void StopAndDispose();
         void StopRecord();
