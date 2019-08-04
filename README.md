@@ -9,3 +9,7 @@ Choose **Continue Record When Over Treshold** ceckbox to record a continuous fil
 The app is listening as soon it's started and will stop to listen when it is closed. Use Start/Stop for manual override.
 
 ![AppWindow](https://github.com/viper3400/Cobaka/blob/master/CobakaMainWindow.png)
+
+## Settings
+
+Settings are stored in "%LOCALAPPDATA%\Cobaka\NoiseDetectorConfig.json" whenever they are changed. Use "Reset Defaults" button to delete the settings file and reset to default values.
