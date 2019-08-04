@@ -6,7 +6,7 @@ If a special treshold is reached it starts a new recording (wav) for some second
 
 Choose **Continue Record When Over Treshold** ceckbox to record a continuous file while noise level is over the treshold. Record will stop when level is under the treshold for the time specified for duration.
 
-The app is listening as soon it's started and will stop to listen when it is closed. Use Start/Stop for manual override.
+Use "Start/Stop" buttons to enable/disable listening mode.
 
 ![AppWindow](https://github.com/viper3400/Cobaka/blob/master/CobakaMainWindow.png)
 
