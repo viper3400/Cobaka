@@ -31,8 +31,9 @@ namespace Jaxx.Net.Cobaka.NoiseDetector.ViewModels
             _audio.StopAndDispose();
         }
 
-        private void Audio_RecordStarted(object sender, EventArgs e)
+        private void Audio_RecordStarted(object sender, AudioEventArgs e)
         {
+            DeviceList = new List<string> { e.Information };
             StopRecord.RaiseCanExecuteChanged();
             StartRecord.RaiseCanExecuteChanged();
         }

@@ -10,7 +10,7 @@
              prism:ViewModelLocator.AutoWireViewModel="True" >
     <Grid>
         <Button Command="{Binding GetDeviceList}" Content="Get Devices" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75"/>
-        <ListView ItemsSource="{Binding DeviceList}" HorizontalAlignment="Left" Height="70" Margin="10,42,0,0" VerticalAlignment="Top" Width="280"/>
+        <ListView ItemsSource="{Binding DeviceList}" HorizontalAlignment="Left" Height="70" Margin="10,42,0,0" VerticalAlignment="Top" Width="366"/>
         <WrapPanel>
             <Button Command="{Binding StartRecord}" Content="Start" HorizontalAlignment="Left" Margin="10,126,0,0" VerticalAlignment="Top" Width="75"/>
             <Button Command="{Binding StopRecord}" Content="Stop" HorizontalAlignment="Left" Margin="10,126,0,0" VerticalAlignment="Top" Width="75"/>

@@ -31,13 +31,13 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
             StopRecord();
         }
 
-        public event EventHandler RecordStarted;
+        public event EventHandler<AudioEventArgs> RecordStarted;
         public event EventHandler SampleAvailable;
         public event EventHandler RecordStopped;
 
-        protected virtual void OnRecordStarted(EventArgs e)
+        protected virtual void OnRecordStarted(AudioEventArgs e)
         {
-            EventHandler handler = RecordStarted;
+            EventHandler<AudioEventArgs> handler = RecordStarted;
             handler?.Invoke(this, e);
         }
 
@@ -86,7 +86,7 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
             var path = Path.Combine(_noiseDetectionOptions.DestinationDirectory, $"autoRecord_{timeStamp}.wav");
             _writer = null;
             _writer = new WaveFileWriter(path, new WaveFormat(_audioIn.WaveFormat.SampleRate, _audioIn.WaveFormat.BitsPerSample, _audioIn.WaveFormat.Channels));
-            OnRecordStarted(new EventArgs());
+            OnRecordStarted(new AudioEventArgs { State = AudioRecordState.Started, Information = $"SampleRate: {_audioIn.WaveFormat.SampleRate}, BitsPerSample: {_audioIn.WaveFormat.BitsPerSample}, Channels: {_audioIn.WaveFormat.Channels}" });
         }
 
         private void AudioInRecordingStopped(object s, StoppedEventArgs a)
