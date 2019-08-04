@@ -11,7 +11,7 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
 
         event EventHandler<AudioEventArgs> AudioEventAvailable;
         void StartRecord();
-        void StopAndDispose();
+        void StopListen();
         void StopRecord();
     }
 }

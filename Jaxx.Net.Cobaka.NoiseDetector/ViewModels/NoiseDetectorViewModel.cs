@@ -26,7 +26,7 @@ namespace Jaxx.Net.Cobaka.NoiseDetector.ViewModels
 
         private void OnStopRequested(string obj)
         {
-            _audio.StopAndDispose();
+            _audio.StopListen();
         }
 
         private void OnAudioEventAvailable(object sender, AudioEventArgs e)

@@ -6,6 +6,6 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
 {
     public enum AudioRecordState
     {
-        RecordStarted, RecordStopped, SampleAvailable
+        RecordStarted, RecordStopped, SampleAvailable, ListeningStarted, ListeningStopped
     }
 }
