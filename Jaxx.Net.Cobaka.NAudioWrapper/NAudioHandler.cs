@@ -85,7 +85,7 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
             Directory.CreateDirectory(_noiseDetectionOptions.DestinationDirectory);
             var path = Path.Combine(_noiseDetectionOptions.DestinationDirectory, $"autoRecord_{timeStamp}.wav");
             _writer = null;
-            _writer = new WaveFileWriter(path, new WaveFormat(_audioIn.WaveFormat.SampleRate, _audioIn.WaveFormat.BitsPerSample, _audioIn.WaveFormat.Channels));
+            _writer = new WaveFileWriter(path, _audioIn.WaveFormat);
             OnRecordStarted(new AudioEventArgs { State = AudioRecordState.Started, Information = $"SampleRate: {_audioIn.WaveFormat.SampleRate}, BitsPerSample: {_audioIn.WaveFormat.BitsPerSample}, Channels: {_audioIn.WaveFormat.Channels}" });
         }
 
