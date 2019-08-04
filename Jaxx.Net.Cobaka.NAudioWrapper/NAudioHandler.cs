@@ -30,7 +30,7 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
         {
             _audioIn.StartRecording();
             IsListening = true;
-            OnAudioEventAvailable(new AudioEventArgs { State = AudioRecordState.ListeningStarted });
+            OnAudioEventAvailable(new AudioEventArgs { State = AudioRecordState.ListeningStarted, Information = "Listening started." });
 
         }
         private void RecordTimer_Elapsed(object sender, ElapsedEventArgs e)
@@ -89,7 +89,7 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
         {
             _writer?.Dispose();
             _writer = null;
-            OnAudioEventAvailable(new AudioEventArgs { State = AudioRecordState.RecordStopped });
+            OnAudioEventAvailable(new AudioEventArgs { State = AudioRecordState.RecordStopped, Information = "Stopped Record." });
             if (!_isStopAndDisposeRequested)
             {
                 _audioIn.StartRecording();
@@ -156,7 +156,7 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
         {
             _audioIn.Dispose();
             IsListening = false;
-            OnAudioEventAvailable(new AudioEventArgs { State = AudioRecordState.ListeningStopped });
+            OnAudioEventAvailable(new AudioEventArgs { State = AudioRecordState.ListeningStopped, Information = "Stopped Listening." });
         }
     }
 }

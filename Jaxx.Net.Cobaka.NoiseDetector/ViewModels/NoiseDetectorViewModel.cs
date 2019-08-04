@@ -37,8 +37,7 @@ namespace Jaxx.Net.Cobaka.NoiseDetector.ViewModels
                     RaisePropertyChanged("PeakValue");
                     RaisePropertyChanged("PeakBarColor");
                     break;
-                case AudioRecordState.RecordStarted:
-                case AudioRecordState.RecordStopped:
+                default:
                     DeviceList = new List<string> { e.Information };
                     StopListening.RaiseCanExecuteChanged();
                     StartListening.RaiseCanExecuteChanged();
