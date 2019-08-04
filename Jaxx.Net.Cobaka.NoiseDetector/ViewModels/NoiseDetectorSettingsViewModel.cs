@@ -10,15 +10,15 @@ namespace Jaxx.Net.Cobaka.NoiseDetector.ViewModels
 {
     public class NoiseDetectorSettingsViewModel : BindableBase
     {
-        private INoiseDetectorOptions _noiseDetectorOptions;
-        public NoiseDetectorSettingsViewModel(INoiseDetectorOptions options)
+        private IAudioConfigurationProvider _optionsProvider;
+        public NoiseDetectorSettingsViewModel(IAudioConfigurationProvider optionsProvider)
         {
-            _noiseDetectorOptions = options;
+            _optionsProvider = optionsProvider;
             // inital fill settings with default value
-            RecordTreshold = Convert.ToInt32(_noiseDetectorOptions.Treshold * 100);
-            DestinationDirectory = _noiseDetectorOptions.DestinationDirectory;
-            DurationInSeconds = (int)_noiseDetectorOptions.RecordDuration.TotalSeconds;
-            ContinueRecordWhenOverTreshold = _noiseDetectorOptions.ContinueRecordWhenOverTreshold;
+            RecordTreshold = Convert.ToInt32(_optionsProvider.NoiseDetectorOptions.Treshold * 100);
+            DestinationDirectory = _optionsProvider.NoiseDetectorOptions.DestinationDirectory;
+            DurationInSeconds = (int)_optionsProvider.NoiseDetectorOptions.RecordDuration.TotalSeconds;
+            ContinueRecordWhenOverTreshold = _optionsProvider.NoiseDetectorOptions.ContinueRecordWhenOverTreshold;
         }
 
         private int _recordTreshold;
@@ -28,7 +28,8 @@ namespace Jaxx.Net.Cobaka.NoiseDetector.ViewModels
             set
             {
                 SetProperty(ref _recordTreshold, value);
-                _noiseDetectorOptions.Treshold = Convert.ToDouble(_recordTreshold) / 100;
+                _optionsProvider.NoiseDetectorOptions.Treshold = Convert.ToDouble(_recordTreshold) / 100;
+                _optionsProvider.Save();
             }
         }
 
@@ -39,7 +40,8 @@ namespace Jaxx.Net.Cobaka.NoiseDetector.ViewModels
             set
             {
                 SetProperty(ref _durationInSeconds, value);
-                _noiseDetectorOptions.RecordDuration = new TimeSpan(0, 0, _durationInSeconds);
+                _optionsProvider.NoiseDetectorOptions.RecordDuration = new TimeSpan(0, 0, _durationInSeconds);
+                _optionsProvider.Save();
             }
         }
 
@@ -50,7 +52,8 @@ namespace Jaxx.Net.Cobaka.NoiseDetector.ViewModels
             set
             {
                 SetProperty(ref _destinationDirectory, value);
-                _noiseDetectorOptions.DestinationDirectory = _destinationDirectory;
+                _optionsProvider.NoiseDetectorOptions.DestinationDirectory = _destinationDirectory;
+                _optionsProvider.Save();
             }
         }
        
@@ -62,7 +65,8 @@ namespace Jaxx.Net.Cobaka.NoiseDetector.ViewModels
             set
             {
                 SetProperty(ref _continueRecordWhenOverTreshold, value);
-                _noiseDetectorOptions.ContinueRecordWhenOverTreshold = _continueRecordWhenOverTreshold;
+                _optionsProvider.NoiseDetectorOptions.ContinueRecordWhenOverTreshold = _continueRecordWhenOverTreshold;
+                _optionsProvider.Save();
             }
         }
 
@@ -73,11 +77,12 @@ namespace Jaxx.Net.Cobaka.NoiseDetector.ViewModels
         void ExecuteSelectFolderDialogCommad()
         {
             var openFolderDialog = new FolderBrowserDialog();
-            openFolderDialog.SelectedPath = _noiseDetectorOptions.DestinationDirectory;
+            openFolderDialog.SelectedPath = _optionsProvider.NoiseDetectorOptions.DestinationDirectory;
             var result = openFolderDialog.ShowDialog();
             if (result == DialogResult.OK)
             {
                 DestinationDirectory = openFolderDialog.SelectedPath;
+                _optionsProvider.Save();
             }
         }
     }
