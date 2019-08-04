@@ -8,5 +8,6 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
         double Treshold { get; set; }
         string DestinationDirectory { get; set; }
         bool ContinueRecordWhenOverTreshold { get; set; }
+        bool ListenOnStartup { get; set; }
     }
 }

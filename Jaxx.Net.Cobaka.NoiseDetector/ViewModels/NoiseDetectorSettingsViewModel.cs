@@ -24,6 +24,7 @@ namespace Jaxx.Net.Cobaka.NoiseDetector.ViewModels
             DestinationDirectory = _optionsProvider.NoiseDetectorOptions.DestinationDirectory;
             DurationInSeconds = (int)_optionsProvider.NoiseDetectorOptions.RecordDuration.TotalSeconds;
             ContinueRecordWhenOverTreshold = _optionsProvider.NoiseDetectorOptions.ContinueRecordWhenOverTreshold;
+            ListenOnStartup = _optionsProvider.NoiseDetectorOptions.ListenOnStartup;
         }
 
         private int _recordTreshold;
@@ -73,6 +74,13 @@ namespace Jaxx.Net.Cobaka.NoiseDetector.ViewModels
                 _optionsProvider.NoiseDetectorOptions.ContinueRecordWhenOverTreshold = _continueRecordWhenOverTreshold;
                 _optionsProvider.Save();
             }
+        }
+
+        private bool _listenOnStartup;
+        public bool ListenOnStartup
+        {
+            get { return _listenOnStartup; }
+            set { SetProperty(ref _listenOnStartup, value); }
         }
 
         private DelegateCommand _selectFolderDialog;

@@ -25,6 +25,10 @@
                     <CheckBox IsChecked="{Binding ContinueRecordWhenOverTreshold}" VerticalAlignment="Center" />
                     <Label Content="Continue Record While Over Treshold"/>
                 </WrapPanel>
+                <WrapPanel>
+                    <CheckBox IsChecked="{Binding ListenOnStartup}" VerticalAlignment="Center" />
+                    <Label Content="Listen On Startup"/>
+                </WrapPanel>
                 <WrapPanel Margin="0,5,0,0">
                     <Button Height="23" Content="Reset Defaults" Command="{Binding ResetDefaults}" Padding="5   ,0,5,0"/>
                 </WrapPanel>
