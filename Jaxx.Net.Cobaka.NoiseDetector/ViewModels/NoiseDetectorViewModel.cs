@@ -40,8 +40,8 @@ namespace Jaxx.Net.Cobaka.NoiseDetector.ViewModels
                 case AudioRecordState.RecordStarted:
                 case AudioRecordState.RecordStopped:
                     DeviceList = new List<string> { e.Information };
-                    StopRecord.RaiseCanExecuteChanged();
-                    StartRecord.RaiseCanExecuteChanged();
+                    StopListening.RaiseCanExecuteChanged();
+                    StartListening.RaiseCanExecuteChanged();
                     break;
             }
         }
@@ -91,33 +91,33 @@ namespace Jaxx.Net.Cobaka.NoiseDetector.ViewModels
         }
 
         private DelegateCommand _recordAudio;
-        public DelegateCommand StartRecord =>
-            _recordAudio ?? (_recordAudio = new DelegateCommand(ExecuteStartRecord, CanStartRecord));
+        public DelegateCommand StartListening =>
+            _recordAudio ?? (_recordAudio = new DelegateCommand(ExecuteStartListen, CanExecuteStartListen));
 
-        void ExecuteStartRecord()
+        void ExecuteStartListen()
         {
-            _audio.StartRecord();
-            StopRecord.RaiseCanExecuteChanged();
-            StartRecord.RaiseCanExecuteChanged();
+            _audio.StartListen();
+            StopListening.RaiseCanExecuteChanged();
+            StartListening.RaiseCanExecuteChanged();
         }
 
-        bool CanStartRecord()
+        bool CanExecuteStartListen()
         {
-            return !_audio.IsRecording;
+            return !_audio.IsListening;
         }
 
-        private DelegateCommand _stopRecordCommand;
-        public DelegateCommand StopRecord =>
-            _stopRecordCommand ?? (_stopRecordCommand = new DelegateCommand(ExecuteStopRecord, CanExecuteStopRecord));
+        private DelegateCommand _stopListening;
+        public DelegateCommand StopListening =>
+            _stopListening ?? (_stopListening = new DelegateCommand(ExecuteStopListen, CanExecuteStopListen));
 
-        void ExecuteStopRecord()
+        void ExecuteStopListen()
         {
-            _audio.StopRecord();
+            _audio.StopListen();
         }
 
-        bool CanExecuteStopRecord()
+        bool CanExecuteStopListen()
         {
-            return _audio.IsRecording;
+            return _audio.IsListening;
         }
 
     }

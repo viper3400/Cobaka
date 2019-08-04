@@ -42,7 +42,7 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
                 NoiseDetectorOptions.RecordDuration = (TimeSpan)jsonObject["RecordDuration"];
                 NoiseDetectorOptions.DestinationDirectory = (string)jsonObject["DestinationDirectory"];
                 NoiseDetectorOptions.ContinueRecordWhenOverTreshold = (bool)jsonObject["ContinueRecordWhenOverTreshold"];
-                NoiseDetectorOptions.ContinueRecordWhenOverTreshold = (bool)jsonObject["ListenOnStartup"];
+                NoiseDetectorOptions.ListenOnStartup = (bool)jsonObject["ListenOnStartup"];
             }
         }
 
@@ -53,7 +53,7 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
             NoiseDetectorOptions.RecordDuration = new System.TimeSpan(0, 0, 10);
             NoiseDetectorOptions.DestinationDirectory = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), "Cobaka", "NoiseDetectorRecords");
             NoiseDetectorOptions.ContinueRecordWhenOverTreshold = true;
-            NoiseDetectorOptions.ListenOnStartup = true;
+            NoiseDetectorOptions.ListenOnStartup = false;
         }
 
         public void Reset()

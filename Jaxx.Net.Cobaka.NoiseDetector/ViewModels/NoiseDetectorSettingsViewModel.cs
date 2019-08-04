@@ -80,7 +80,12 @@ namespace Jaxx.Net.Cobaka.NoiseDetector.ViewModels
         public bool ListenOnStartup
         {
             get { return _listenOnStartup; }
-            set { SetProperty(ref _listenOnStartup, value); }
+            set
+            {
+                SetProperty(ref _listenOnStartup, value);
+                _optionsProvider.NoiseDetectorOptions.ListenOnStartup = _listenOnStartup;
+                _optionsProvider.Save();
+            }
         }
 
         private DelegateCommand _selectFolderDialog;

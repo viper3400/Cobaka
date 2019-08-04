@@ -26,9 +26,10 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
             _recordTimer.Elapsed += RecordTimer_Elapsed;
         }
 
-        private void StartListen()
+        public void StartListen()
         {
             _audioIn.StartRecording();
+            IsListening = true;
             OnAudioEventAvailable(new AudioEventArgs { State = AudioRecordState.ListeningStarted });
 
         }
@@ -54,6 +55,8 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
                 return GetDevices();
             }
         }
+
+        public bool IsListening { get; private set; }
 
         private List<string> GetDevices()
         {
@@ -152,6 +155,7 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
         private void DisposeAudioDevice()
         {
             _audioIn.Dispose();
+            IsListening = false;
             OnAudioEventAvailable(new AudioEventArgs { State = AudioRecordState.ListeningStopped });
         }
     }
