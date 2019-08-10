@@ -94,7 +94,10 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
             {
                 _audioIn.StartRecording();
             }
-            else DisposeAudioDevice();
+            else if (!IsListening)
+            {
+                DisposeAudioDevice();
+            }
         }
 
         private void AudioInDataAvailable(object s, WaveInEventArgs a)
