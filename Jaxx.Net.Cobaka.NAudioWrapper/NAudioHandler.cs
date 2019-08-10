@@ -17,10 +17,6 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
         public NAudioHandler(INoiseDetectorOptions options)
         {
             _noiseDetectionOptions = options;
-            _audioIn = new WasapiCapture();
-            _audioIn.DataAvailable += AudioInDataAvailable;
-            _audioIn.RecordingStopped += AudioInRecordingStopped;
-            PeakValue = 0;
             if (_noiseDetectionOptions.ListenOnStartup) StartListen();
             _recordTimer = new Timer { AutoReset = true };
             _recordTimer.Elapsed += RecordTimer_Elapsed;
@@ -28,6 +24,10 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
 
         public void StartListen()
         {
+            _audioIn = new WasapiCapture();
+            _audioIn.DataAvailable += AudioInDataAvailable;
+            _audioIn.RecordingStopped += AudioInRecordingStopped;
+            PeakValue = 0;
             _audioIn.StartRecording();
             IsListening = true;
             OnAudioEventAvailable(new AudioEventArgs { State = AudioRecordState.ListeningStarted, Information = "Listening started." });
