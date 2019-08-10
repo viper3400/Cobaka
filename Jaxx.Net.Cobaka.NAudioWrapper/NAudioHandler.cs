@@ -149,7 +149,10 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
             {
                 StopRecord();
             }
-            else DisposeAudioDevice();
+            else if (IsListening)
+            {
+                DisposeAudioDevice();
+            }
         }
 
         private void DisposeAudioDevice()
