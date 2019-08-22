@@ -25,6 +25,16 @@ namespace Jaxx.Net.Cobaka.WinPowerPlan
             }
         }
 
+        public static Dictionary<Guid, string> GetAvailablePowerPlans()
+        {
+            var availablePowerPlans = new Dictionary<Guid, string>();
+            foreach (var plan in FindAll())
+            {
+                availablePowerPlans.Add(plan, ReadFriendlyName(plan));
+            }
+            return availablePowerPlans;
+        }
+
         public static string ReadFriendlyName(Guid schemeGuid)
         {
             uint sizeName = 1024;
