@@ -16,12 +16,14 @@ namespace Jaxx.Net.Cobaka.NoiseDetector.ViewModels
     {
         private readonly IAudioHandler _audio;
         private INoiseDetectorOptions _noiseDetectorOptions;
+        private IEventAggregator _eventAggregator;
         public NoiseDetectorViewModel(INoiseDetectorOptions options, IAudioHandler audio, IEventAggregator eventAggregator)
         {
             _noiseDetectorOptions = options;
             _audio = audio;
             _audio.AudioEventAvailable += OnAudioEventAvailable;
-            eventAggregator.GetEvent<NoiseDetectorChangeEvent>().Subscribe(OnStopRequested);
+            _eventAggregator = eventAggregator;
+            _eventAggregator.GetEvent<NoiseDetectorChangeEvent>().Subscribe(OnStopRequested);
         }
 
         private void OnStopRequested(NoiseDetectorEvent evnt)
@@ -95,6 +97,7 @@ namespace Jaxx.Net.Cobaka.NoiseDetector.ViewModels
 
         void ExecuteStartListen()
         {
+            _eventAggregator.GetEvent<NoiseDetector.NoiseDetectorChangeEvent>().Publish(NoiseDetector.NoiseDetectorEvent.StartListening);
             _audio.StartListen();
             StopListening.RaiseCanExecuteChanged();
             StartListening.RaiseCanExecuteChanged();
@@ -111,6 +114,7 @@ namespace Jaxx.Net.Cobaka.NoiseDetector.ViewModels
 
         void ExecuteStopListen()
         {
+            _eventAggregator.GetEvent<NoiseDetector.NoiseDetectorChangeEvent>().Publish(NoiseDetector.NoiseDetectorEvent.StopListening);
             _audio.StopListen();
         }
 
