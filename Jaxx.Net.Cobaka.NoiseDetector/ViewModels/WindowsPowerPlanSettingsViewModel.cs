@@ -4,15 +4,39 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Jaxx.Net.Cobaka.WinPowerPlan;
+using Prism.Events;
 
 namespace Jaxx.Net.Cobaka.NoiseDetector.ViewModels
 {
     public class WindowsPowerPlanSettingsViewModel : BindableBase
     {
-        public WindowsPowerPlanSettingsViewModel()
-        {
-            ActivePowerPlan = PowerPlan.GetActive();
+        private IEventAggregator _eventAggregator;
+        public WindowsPowerPlanSettingsViewModel(IEventAggregator eventAggregator)
+        {            
+            DesiredPowerPlanWhenNotListening = PowerPlan.GetActive();
             AvailablePowerPlans = PowerPlan.GetAvailablePowerPlans();
+            _eventAggregator = eventAggregator;
+            eventAggregator.GetEvent<NoiseDetectorChangeEvent>().Subscribe(OnNoiseDetectorChangeEvent);
+        }
+
+        private void OnNoiseDetectorChangeEvent(NoiseDetectorEvent evnt)
+        {
+            switch (evnt)
+            {
+                case NoiseDetectorEvent.StartListening:
+                    if (IsChangePPWhenListeningModeChanged) PowerPlan.SetActive(DesiredPowerPlanWhenListening);
+                    break;
+                case NoiseDetectorEvent.StopListening:
+                    if (IsChangePPWhenListeningModeChanged) PowerPlan.SetActive(DesiredPowerPlanWhenNotListening);
+                    break;
+            }
+        }
+
+        private bool _isChangePPWhenListeningModeChanged;
+        public bool IsChangePPWhenListeningModeChanged
+        {
+            get { return _isChangePPWhenListeningModeChanged; }
+            set { SetProperty(ref _isChangePPWhenListeningModeChanged, value); }
         }
 
         private Dictionary<Guid,string> _availablePowerPlans;
@@ -22,14 +46,13 @@ namespace Jaxx.Net.Cobaka.NoiseDetector.ViewModels
             set { SetProperty(ref _availablePowerPlans, value); }
         }
 
-        private Guid _activePowerPlan;
-        public Guid ActivePowerPlan
+        private Guid _DesiredPowerPlanWhenNotListening;
+        public Guid DesiredPowerPlanWhenNotListening
         {
-            get { return _activePowerPlan; }
+            get { return _DesiredPowerPlanWhenNotListening; }
             set
             {
-                SetProperty(ref _activePowerPlan, value);
-                PowerPlan.SetActive(ActivePowerPlan);
+                SetProperty(ref _DesiredPowerPlanWhenNotListening, value);
             }
         }
 

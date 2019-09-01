@@ -5,21 +5,25 @@
              prism:ViewModelLocator.AutoWireViewModel="True">
     <Grid>
         <GroupBox Header="Power Plan Settings">
-            <StackPanel>
-                <Label Content="Active Power Plan"/>
+            <StackPanel Margin="3">
+                <WrapPanel>
+                    <CheckBox IsChecked="{Binding IsChangePPWhenListeningModeChanged}" VerticalAlignment="Center" />
+                    <Label Content="Change Power Plan Depending On Listening Mode"/>
+                </WrapPanel>
+                <Label Content="When Not Listening"/>
                 <ComboBox ItemsSource="{Binding AvailablePowerPlans}" 
                               DisplayMemberPath="Value"
                               SelectedValuePath="Key"
-                              SelectedValue="{Binding ActivePowerPlan}"
-                              Width="150"
+                              SelectedValue="{Binding DesiredPowerPlanWhenNotListening}"
+                              Width="190"
                               HorizontalAlignment="Left">
                 </ComboBox>
-                <Label Content="Desired Power Plan When Listening"/>
+                <Label Content="When Listening"/>
                 <ComboBox ItemsSource="{Binding AvailablePowerPlans}" 
                               DisplayMemberPath="Value"
                               SelectedValuePath="Key"
                               SelectedValue="{Binding DesiredPowerPlanWhenListening}"
-                              Width="150"
+                              Width="190"
                               HorizontalAlignment="Left">
                 </ComboBox>
             </StackPanel>
