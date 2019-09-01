@@ -4,17 +4,19 @@ using System.Text;
 using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Jaxx.Net.Cobaka.NAudioWrapper;
 
-namespace Jaxx.Net.Cobaka.NAudioWrapper
+namespace Jaxx.Net.Cobaka.NoiseDetector
 {
-    public class AudioConfigurationProvider : IAudioConfigurationProvider
+    public class ConfigurationProvider : IConfigurationProvider
     {
         private readonly string _configPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Cobaka");
         private readonly string _configFile;
-        public AudioConfigurationProvider(INoiseDetectorOptions noiseDetectorOptions)
+        public ConfigurationProvider(INoiseDetectorOptions noiseDetectorOptions, IPowerPlanOptions ppOptions)
         {            
             // init with default values
             NoiseDetectorOptions = noiseDetectorOptions;
+            PowerPlanOptions = ppOptions;
             InitDefaults();
 
             // check for existing config
@@ -27,8 +29,11 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
             using (StreamWriter file = File.CreateText(_configFile))
             {
                 JsonSerializer serializer = new JsonSerializer();
+                var configObject = new Dictionary<string, object>();
+                configObject.Add(NoiseDetectorOptions.GetType().Name, NoiseDetectorOptions);
+                configObject.Add(PowerPlanOptions.GetType().Name, PowerPlanOptions);
                 //serialize object directly into file stream
-                serializer.Serialize(file, NoiseDetectorOptions);
+                serializer.Serialize(file, configObject);
             }
         }
 
@@ -38,11 +43,14 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
             {
                 var jsonString = File.ReadAllText(_configFile);
                 var jsonObject = JObject.Parse(jsonString);
-                NoiseDetectorOptions.Treshold = (double)jsonObject["Treshold"];
-                NoiseDetectorOptions.RecordDuration = (TimeSpan)jsonObject["RecordDuration"];
-                NoiseDetectorOptions.DestinationDirectory = (string)jsonObject["DestinationDirectory"];
-                NoiseDetectorOptions.ContinueRecordWhenOverTreshold = (bool)jsonObject["ContinueRecordWhenOverTreshold"];
-                NoiseDetectorOptions.ListenOnStartup = (bool)jsonObject["ListenOnStartup"];
+                NoiseDetectorOptions.Treshold = (double)jsonObject["NoiseDetectorOptions"]["Treshold"];
+                NoiseDetectorOptions.RecordDuration = (TimeSpan)jsonObject["NoiseDetectorOptions"]["RecordDuration"];
+                NoiseDetectorOptions.DestinationDirectory = (string)jsonObject["NoiseDetectorOptions"]["DestinationDirectory"];
+                NoiseDetectorOptions.ContinueRecordWhenOverTreshold = (bool)jsonObject["NoiseDetectorOptions"]["ContinueRecordWhenOverTreshold"];
+                NoiseDetectorOptions.ListenOnStartup = (bool)jsonObject["NoiseDetectorOptions"]["ListenOnStartup"];
+                PowerPlanOptions.ChangePowerPlanOnListeningModeChange = (bool)jsonObject["PowerPlanOptions"]["ChangePowerPlanOnListeningModeChange"];
+                PowerPlanOptions.DesiredPowerPlanWhenListening =(Guid)jsonObject["PowerPlanOptions"]["DesiredPowerPlanWhenListening"];
+                PowerPlanOptions.DesiredPowerPlanWhenNotListening = (Guid)jsonObject["PowerPlanOptions"]["DesiredPowerPlanWhenNotListening"];
             }
         }
 
@@ -54,6 +62,9 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
             NoiseDetectorOptions.DestinationDirectory = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), "Cobaka", "NoiseDetectorRecords");
             NoiseDetectorOptions.ContinueRecordWhenOverTreshold = true;
             NoiseDetectorOptions.ListenOnStartup = false;
+            PowerPlanOptions.ChangePowerPlanOnListeningModeChange = false;
+            PowerPlanOptions.DesiredPowerPlanWhenListening = Guid.Empty;
+            PowerPlanOptions.DesiredPowerPlanWhenNotListening = Guid.Empty;
         }
 
         public void Reset()
@@ -64,5 +75,6 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
         }
 
         public INoiseDetectorOptions NoiseDetectorOptions { get; private set; }
+        public IPowerPlanOptions PowerPlanOptions { get; private set; }
     }
 }

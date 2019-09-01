@@ -22,7 +22,8 @@ namespace Jaxx.Net.Cobaka.NoiseDetector
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterSingleton<INoiseDetectorOptions, NoiseDetectorOptions>();
-            containerRegistry.RegisterSingleton<IAudioConfigurationProvider, AudioConfigurationProvider>();
+            containerRegistry.RegisterSingleton<IPowerPlanOptions, PowerPlanOptions>();
+            containerRegistry.RegisterSingleton<IConfigurationProvider, ConfigurationProvider>();
             containerRegistry.RegisterSingleton<IAudioHandler, NAudioHandler>();
         }
     }

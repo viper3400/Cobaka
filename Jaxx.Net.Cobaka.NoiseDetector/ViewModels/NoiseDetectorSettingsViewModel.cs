@@ -10,8 +10,8 @@ namespace Jaxx.Net.Cobaka.NoiseDetector.ViewModels
 {
     public class NoiseDetectorSettingsViewModel : BindableBase
     {
-        private IAudioConfigurationProvider _optionsProvider;
-        public NoiseDetectorSettingsViewModel(IAudioConfigurationProvider optionsProvider)
+        private IConfigurationProvider _optionsProvider;
+        public NoiseDetectorSettingsViewModel(IConfigurationProvider optionsProvider)
         {
             _optionsProvider = optionsProvider;
             // inital fill settings with default value
