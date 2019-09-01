@@ -21,12 +21,12 @@ namespace Jaxx.Net.Cobaka.NoiseDetector.ViewModels
             _noiseDetectorOptions = options;
             _audio = audio;
             _audio.AudioEventAvailable += OnAudioEventAvailable;
-            eventAggregator.GetEvent<StopRequestEvent>().Subscribe(OnStopRequested);
+            eventAggregator.GetEvent<NoiseDetectorChangeEvent>().Subscribe(OnStopRequested);
         }
 
-        private void OnStopRequested(string obj)
+        private void OnStopRequested(NoiseDetectorEvent evnt)
         {
-            _audio.StopListen();
+            if (evnt == NoiseDetectorEvent.StopRequested) _audio.StopListen();
         }
 
         private void OnAudioEventAvailable(object sender, AudioEventArgs e)

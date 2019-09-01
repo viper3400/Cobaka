@@ -26,7 +26,7 @@ namespace Jaxx.Net.Cobaka.Views
 
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            _eventAggregator.GetEvent<NoiseDetector.StopRequestEvent>().Publish("Closing");
+            _eventAggregator.GetEvent<NoiseDetector.NoiseDetectorChangeEvent>().Publish(NoiseDetector.NoiseDetectorEvent.StopRequested);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

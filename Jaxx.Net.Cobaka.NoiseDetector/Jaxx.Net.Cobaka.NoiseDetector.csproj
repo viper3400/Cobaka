@@ -63,7 +63,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="StopRequestEvent.cs" />
+    <Compile Include="NoiseDetectorChangeEvent.cs" />
     <Compile Include="ViewModels\NoiseDetectorModuleMainViewModel.cs" />
     <Compile Include="ViewModels\NoiseDetectorSettingsViewModel.cs" />
     <Compile Include="ViewModels\NoiseDetectorViewModel.cs" />
