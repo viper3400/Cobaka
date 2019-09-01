@@ -1,4 +1,5 @@
 ﻿using Prism.Mvvm;
+using System.Diagnostics;
 
 namespace Jaxx.Net.Cobaka.ViewModels
 {
@@ -13,7 +14,10 @@ namespace Jaxx.Net.Cobaka.ViewModels
 
         public MainWindowViewModel()
         {
-
+            System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
+            FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+            string version = fvi.FileVersion;
+            Title = $"{Title} - {version}";
         }
     }
 }
