@@ -14,6 +14,7 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
         private readonly INoiseDetectorOptions _noiseDetectionOptions;
         private readonly Timer _recordTimer;
         private bool _isStopAndDisposeRequested;
+        private string _currentTimeStamp;
         public NAudioHandler(INoiseDetectorOptions options)
         {
             _noiseDetectionOptions = options;
@@ -30,6 +31,7 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
             PeakValue = 0;
             _audioIn.StartRecording();
             IsListening = true;
+            _isStopAndDisposeRequested = false;
             OnAudioEventAvailable(new AudioEventArgs { State = AudioRecordState.ListeningStarted, Information = "Listening started." });
 
         }
@@ -77,9 +79,9 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
             IsRecording = true;
             _recordTimer.Interval = _noiseDetectionOptions.RecordDuration.TotalMilliseconds;
             _recordTimer.Start();
-            var timeStamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+            _currentTimeStamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
             Directory.CreateDirectory(_noiseDetectionOptions.DestinationDirectory);
-            var path = Path.Combine(_noiseDetectionOptions.DestinationDirectory, $"autoRecord_{timeStamp}.wav");
+            var path = Path.Combine(_noiseDetectionOptions.DestinationDirectory, $"autoRecord_{_currentTimeStamp}.rec");
             _writer = null;
             _writer = new WaveFileWriter(path, _audioIn.WaveFormat);
             OnAudioEventAvailable(new AudioEventArgs { State = AudioRecordState.RecordStarted, Information = $"SampleRate: {_audioIn.WaveFormat.SampleRate}, BitsPerSample: {_audioIn.WaveFormat.BitsPerSample}, Channels: {_audioIn.WaveFormat.Channels}" });
@@ -90,6 +92,9 @@ namespace Jaxx.Net.Cobaka.NAudioWrapper
             _writer?.Dispose();
             _writer = null;
             OnAudioEventAvailable(new AudioEventArgs { State = AudioRecordState.RecordStopped, Information = "Stopped Record." });
+            var recordAudioPath = Path.Combine(_noiseDetectionOptions.DestinationDirectory, $"autoRecord_{_currentTimeStamp}.rec");
+            var audioPath = Path.Combine(_noiseDetectionOptions.DestinationDirectory, $"autoRecord_{_currentTimeStamp}.wav");
+            File.Move(recordAudioPath, audioPath);
             if (!_isStopAndDisposeRequested)
             {
                 _audioIn.StartRecording();
