@@ -14,6 +14,10 @@ Use "Start/Stop" buttons to enable/disable listening mode.
 
 Settings are stored in "%LOCALAPPDATA%\Cobaka\NoiseDetectorConfig.json" whenever they are changed. Use "Reset Defaults" button to delete the settings file and reset to default values.
 
+### Troubleshooting after Update to Latest Version
+
+After update Cobaka to a newer version it may be necessary to delete "%LOCALAPPDATA%\Cobaka\NoiseDetectorConfig.json" as there is no update mechanism for settings in place. Exceoptions may occur if there are new / changed / deleted settings in new Cobaka version.
+
 ## Build
 * This is a .NET Core 3 app (starting with tag 1.5.0)
 * Clone solution and cd into directory
