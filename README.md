@@ -13,3 +13,14 @@ Use "Start/Stop" buttons to enable/disable listening mode.
 ## Settings
 
 Settings are stored in "%LOCALAPPDATA%\Cobaka\NoiseDetectorConfig.json" whenever they are changed. Use "Reset Defaults" button to delete the settings file and reset to default values.
+
+## Build
+* This is a .NET Core 3 app (starting with tag 1.5.0)
+* Clone solution and cd into directory
+* run ```dotnet restore```
+* run ```dotnet build```
+* to publish as self-contained and trimmed Windows 10 application for run ```dotnet publish -c Release -r win10-x64 /p:PublishSingleFile=true /p:PublishTrimmed=true /p:Version=x.x.x.x``` (x => version)
+
+## 3rd Party Credits
+* https://github.com/naudio/NAudio
+* https://www.newtonsoft.com/json
