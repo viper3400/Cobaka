@@ -88,7 +88,7 @@ namespace Jaxx.Net.Cobaka.NoiseDetector.ViewModels
 
         void ExecuteExploreRecords()
         {
-            Process.Start(_noiseDetectorOptions.DestinationDirectory);
+            Process.Start(Environment.GetEnvironmentVariable("WINDIR") + @"\explorer.exe",_noiseDetectorOptions.DestinationDirectory);
         }
 
         private DelegateCommand _recordAudio;
