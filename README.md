@@ -10,6 +10,10 @@ Use "Start/Stop" buttons to enable/disable listening mode.
 
 ![AppWindow](https://github.com/viper3400/Cobaka/blob/master/CobakaMainWindow.png)
 
+## Download
+
+https://github.com/viper3400/Cobaka/releases/latest
+
 ## Settings
 
 Settings are stored in "%LOCALAPPDATA%\Cobaka\NoiseDetectorConfig.json" whenever they are changed. Use "Reset Defaults" button to delete the settings file and reset to default values.
