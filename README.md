@@ -16,7 +16,7 @@ Settings are stored in "%LOCALAPPDATA%\Cobaka\NoiseDetectorConfig.json" whenever
 
 ### Troubleshooting after Update to Latest Version
 
-After update Cobaka to a newer version it may be necessary to delete "%LOCALAPPDATA%\Cobaka\NoiseDetectorConfig.json" as there is no update mechanism for settings in place. Exceoptions may occur if there are new / changed / deleted settings in new Cobaka version.
+After update Cobaka to a newer version it may be necessary to delete "%LOCALAPPDATA%\Cobaka\NoiseDetectorConfig.json" as there is no update mechanism for settings in place. Exceptions may occur if settings properties are new, changed or deleted in a new Cobaka version.
 
 ## Build
 * This is a .NET Core 3 app (starting with tag 1.5.0)
